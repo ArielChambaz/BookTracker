@@ -12,6 +12,7 @@ class DashboardController extends Controller
     {
         $authorsCount = Author::count();
         $booksCount = Book::count();
-        return view('welcome', compact('authorsCount', 'booksCount'));
+        $authors = Author::all();
+        return view('welcome', compact('authorsCount', 'booksCount', 'authors'));
     }
 }
