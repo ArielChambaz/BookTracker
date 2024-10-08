@@ -13,3 +13,5 @@ Route::post('/add-authors', [AuthorController::class, 'store']);
 
 Route::resource('books', BookController::class);
 Route::resource('authors', AuthorController::class);
+
+Route::get('authors/afterEdit', [AuthorController::class, 'afterEdit'])->name('authors.afterEdit');

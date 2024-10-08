@@ -109,7 +109,7 @@
                                         {{ $author->description }}
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900" onclick="openModal({{ $author->id }})">Edit</a>
+                                        <a href="{{ route('authors.edit', $author->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -119,38 +119,4 @@
             </div>
         </div>
 @endsection
-
-<script>
-    function openModal(authorId) {
-        // Rechercher l'auteur par ID
-        const authors = @json($authors);
-        const author = authors.find(author => author.id === authorId);
-
-        // Remplir les champs de la modal avec les informations de l'auteur
-        document.getElementById('first_name').value = author.first_name;
-        document.getElementById('last_name').value = author.last_name;
-        document.getElementById('email').value = author.email;
-        document.getElementById('birth_year').value = author.birth_year;
-        document.getElementById('description').value = author.description;
-
-        // Afficher la modal et ajouter l'effet de flou au contenu principal
-        document.getElementById('crud-modal').classList.remove('hidden');
-        document.getElementById('main-content').classList.add('blur-background');
-    }
-
-    function closeModal() {
-        // Cacher la modal et enlever l'effet de flou
-        document.getElementById('crud-modal').classList.add('hidden');
-        document.getElementById('main-content').classList.remove('blur-background');
-    }
-</script>
-
-
-<style>
-    .blur-background {
-        filter: blur(5px);
-        transition: filter 0.7s ease; /* Smooth transition */
-    }
-
-</style>
 

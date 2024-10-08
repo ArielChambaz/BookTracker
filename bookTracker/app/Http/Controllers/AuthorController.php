@@ -20,6 +20,41 @@ class AuthorController extends Controller
         return view('add-authors', compact('authorsCount', 'booksCount', 'authors'));
     }
 
+    public function afterEdit() 
+    {
+        $authorsCount = Author::count();
+        $booksCount = Book::count();
+        $authors = Author::all();
+        return view('welcome', compact('authorsCount', 'booksCount', 'authors'));
+    }
+
+    public function edit(Author $author)
+    {
+        return view('authors.edit', compact('author'));
+    }
+
+     public function update(Request $request, Author $author)
+    {
+        try { 
+            $validatedData = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:authors,email,' . $author->id,
+                'birth_year' => 'required|integer',
+                'description' => 'nullable|string',
+            ]);
+
+            $author->update($validatedData);
+
+            return redirect()->route('authors.index')->with('success', 'Author updated successfully.');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (Exception $e) {
+            Log::error('Error updating author: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while updating the author.');
+        }
+    }
+
     public function store(Request $request)
     {
         try {

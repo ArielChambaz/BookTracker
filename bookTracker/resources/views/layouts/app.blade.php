@@ -196,7 +196,4 @@
         </div>
     </body>
 
-    {{-- for the modals else they are blur --}}
-    @include('modal.edit-authors')
-
 </html>
