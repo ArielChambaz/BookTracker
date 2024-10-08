@@ -20,3 +20,7 @@ Route::resource('authors', AuthorController::class);
 Route::resource('books', BookController::class);
 
 Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
+
+// Route pour afficher le formulaire de modification d'un livre
+Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
+

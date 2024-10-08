@@ -29,26 +29,31 @@ class AuthorController extends Controller
     }
 
     public function update(Request $request, Author $author)
-    {
-        try { 
-            $validatedData = $request->validate([
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'email' => 'required|email|max:255|unique:authors,email,' . $author->id,
-                'birth_year' => 'required|integer',
-                'description' => 'nullable|string',
-            ]);
-
-            $author->update($validatedData);
-
-            return redirect()->route('dashboard.index')->with('success', 'Author updated successfully.');
-        } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->errors())->withInput();
-        } catch (Exception $e) {
-            Log::error('Error updating author: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while updating the author.');
+{
+    try {
+        // Check if auhtor is link to some books
+        if ($author->books()->count() > 0) {
+            return redirect()->back()->with('error', 'Cannot change the name of an author who is linked to a book.');
         }
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:authors,email,' . $author->id,
+            'birth_year' => 'required|integer',
+            'description' => 'nullable|string',
+        ]);
+
+        $author->update($validatedData);
+
+        return redirect()->route('dashboard.index')->with('success', 'Author updated successfully.');
+    } catch (ValidationException $e) {
+        return redirect()->back()->withErrors($e->errors())->withInput();
+    } catch (Exception $e) {
+        Log::error('Error updating author: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'An error occurred while updating the author.');
     }
+}
 
     public function destroy(Author $author)
     {
