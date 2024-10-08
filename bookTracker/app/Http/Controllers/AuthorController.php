@@ -28,10 +28,14 @@ class AuthorController extends Controller
         return view('authors.edit', compact('author', 'authorsCount', 'booksCount', 'authors'));
     }
 
-    public function destroy()
+    public function destroy(Author $author)
     {
         try {
-            $author = Author::findOrFail(request('author_id'));
+            // Vérifier si l'auteur est lié à des livres
+            if ($author->books()->count() > 0) {
+                return redirect()->route('dashboard.index')->with('error', 'Cannot delete author with associated books.');
+            }
+
             $author->delete();
             return redirect()->route('dashboard.index')->with('success', 'Author deleted successfully.');
         } catch (Exception $e) {

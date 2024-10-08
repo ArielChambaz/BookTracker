@@ -89,7 +89,7 @@
                 </svg>
                 Validation Error
             </p>
-            <ul class="ml-4 p-3 list-disc list-inside">@extends('layouts.app')
+            <ul class="ml-4 p-3 list-disc list-inside">
 
                 @section('title', 'Dashboard')
                 
