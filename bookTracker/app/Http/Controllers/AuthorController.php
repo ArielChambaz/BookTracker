@@ -53,6 +53,11 @@ class AuthorController extends Controller
     public function destroy(Author $author)
     {
         try {
+            // Vérifier si l'auteur est lié à des livres
+            if ($author->books()->count() > 0) {
+                return redirect()->route('dashboard.index')->with('error', 'Cannot delete author with associated books.');
+            }
+
             $author->delete();
             return redirect()->route('dashboard.index')->with('success', 'Author deleted successfully.');
         } catch (Exception $e) {
