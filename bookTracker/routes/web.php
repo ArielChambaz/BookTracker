@@ -14,8 +14,9 @@ Route::get('/authors/create', [AuthorController::class, 'create'])->name('author
 // Route pour afficher le formulaire de modification d'un auteur
 Route::get('/authors/{author}/edit', [AuthorController::class, 'edit'])->name('authors.edit');
 
-
 Route::resource('authors', AuthorController::class);
 
 // Routes pour les livres
 Route::resource('books', BookController::class);
+
+Route::get('/books/create', [BookController::class, 'create'])->name('books.create');

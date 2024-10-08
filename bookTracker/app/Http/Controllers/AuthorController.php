@@ -17,7 +17,7 @@ class AuthorController extends Controller
         $authorsCount = Author::count();
         $booksCount = Book::count();
         $authors = Author::all();
-        return view('add-authors', compact('authorsCount', 'booksCount', 'authors'));
+        return view('authors.add-authors', compact('authorsCount', 'booksCount', 'authors'));
     }
 
     public function edit(Author $author)
