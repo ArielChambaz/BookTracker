@@ -29,45 +29,41 @@ class AuthorController extends Controller
     }
 
     public function update(Request $request, Author $author)
-{
-    try {
-        // Check if auhtor is link to some books
-        if ($author->books()->count() > 0) {
-            return redirect()->back()->with('error', 'Cannot change the name of an author who is linked to a book.');
-        }
-
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:authors,email,' . $author->id,
-            'birth_year' => 'required|integer',
-            'description' => 'nullable|string',
-        ]);
-
-        $author->update($validatedData);
-
-        return redirect()->route('dashboard.index')->with('success', 'Author updated successfully.');
-    } catch (ValidationException $e) {
-        return redirect()->back()->withErrors($e->errors())->withInput();
-    } catch (Exception $e) {
-        Log::error('Error updating author: ' . $e->getMessage());
-        return redirect()->back()->with('error', 'An error occurred while updating the author.');
-    }
-}
-
-    public function destroy(Author $author)
     {
         try {
-            // Vérifier si l'auteur est lié à des livres
-            if ($author->books()->count() > 0) {
-                return redirect()->route('dashboard.index')->with('error', 'Cannot delete author with associated books.');
+            // Check if the author is associated with any books
+            $isLinkedToBooks = $author->books()->count() > 0;
+
+            // Validation rules
+            $rules = [
+                'email' => 'required|email|max:255|unique:authors,email,' . $author->id,
+                'birth_year' => 'required|integer',
+                'description' => 'nullable|string',
+            ];
+
+            // If the author is not linked to any books, allow changing the name
+            if (!$isLinkedToBooks) {
+                $rules['first_name'] = 'required|string|max:255';
+                $rules['last_name'] = 'required|string|max:255';
             }
 
-            $author->delete();
-            return redirect()->route('dashboard.index')->with('success', 'Author deleted successfully.');
+            $validatedData = $request->validate($rules);
+
+            // If the author is linked to books, check if the name has been changed
+            if ($isLinkedToBooks) {
+                if ($request->input('first_name') !== $author->first_name || $request->input('last_name') !== $author->last_name) {
+                    throw new Exception('Cannot change the name of an author who is linked to a book.');
+                }
+            }
+
+            $author->update($validatedData);
+
+            return redirect()->route('dashboard.index')->with('success', 'Author updated successfully.');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (Exception $e) {
-            Log::error('Error deleting author: ' . $e->getMessage());
-            return redirect()->route('dashboard.index')->with('error', 'An error occurred while deleting the author.');
+            Log::error('Error updating author: ' . $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
