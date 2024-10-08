@@ -283,20 +283,6 @@
                 @endsection
                 
                 
-                
-                ajoute 
-                    alert.classList.remove('opacity-0');
-                    alert.classList.add('opacity-100');
-                }, 200); // Delay to ensure the transition is visible
-
-                setTimeout(() => {
-                    alert.classList.remove('opacity-100');
-                    alert.classList.add('opacity-0');
-                    setTimeout(() => {
-                        alert.remove();
-                    }, 500); // Wait for the transition to complete before removing the element
-                }, 5200); // 5 seconds after the alert appears
-            });
         </script>
     @endif
 

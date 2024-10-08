@@ -28,6 +28,18 @@ class AuthorController extends Controller
         return view('authors.edit', compact('author', 'authorsCount', 'booksCount', 'authors'));
     }
 
+    public function destroy()
+    {
+        try {
+            $author = Author::findOrFail(request('author_id'));
+            $author->delete();
+            return redirect()->route('dashboard.index')->with('success', 'Author deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('Error deleting author: ' . $e->getMessage());
+            return redirect()->route('dashboard.index')->with('error', 'An error occurred while deleting the author.');
+        }
+    }
+
     public function update(Request $request, Author $author)
     {
         try {
