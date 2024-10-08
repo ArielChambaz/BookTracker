@@ -68,7 +68,7 @@
                         </a>
             
                         <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                            href="#">
+                            href="/search">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -76,7 +76,7 @@
                                 </path>
                             </svg>
             
-                            <span class="mx-3">Search for a book</span>
+                            <span class="mx-3">Search</span>
                         </a>
                     </nav>
                 </div>
@@ -89,20 +89,6 @@
                                         stroke-linejoin="round"></path>
                                 </svg>
                             </button>
-            
-                            <div class="relative mx-4 lg:mx-0">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                                        <path
-                                            d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        </path>
-                                    </svg>
-                                </span>
-            
-                                <input class="w-32 pl-10 pr-4 rounded-md form-input sm:w-64 focus:border-indigo-600" type="text"
-                                    placeholder="Search">
-                            </div>
                         </div>
             
                         <div class="flex items-center">

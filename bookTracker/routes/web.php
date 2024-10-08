@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\SearchController;
 
 // Routes pour le tableau de bord
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -23,4 +24,6 @@ Route::get('/books/create', [BookController::class, 'create'])->name('books.crea
 
 // Route pour afficher le formulaire de modification d'un livre
 Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
