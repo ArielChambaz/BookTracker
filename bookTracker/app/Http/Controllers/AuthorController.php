@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthorController extends Controller
 {
-    public function index()
+    public function create()
     {
         $authorsCount = Author::count();
         $booksCount = Book::count();
@@ -20,20 +20,15 @@ class AuthorController extends Controller
         return view('add-authors', compact('authorsCount', 'booksCount', 'authors'));
     }
 
-    public function afterEdit() 
+    public function edit(Author $author)
     {
         $authorsCount = Author::count();
         $booksCount = Book::count();
         $authors = Author::all();
-        return view('welcome', compact('authorsCount', 'booksCount', 'authors'));
+        return view('authors.edit', compact('author', 'authorsCount', 'booksCount', 'authors'));
     }
 
-    public function edit(Author $author)
-    {
-        return view('authors.edit', compact('author'));
-    }
-
-     public function update(Request $request, Author $author)
+    public function update(Request $request, Author $author)
     {
         try { 
             $validatedData = $request->validate([
@@ -46,12 +41,23 @@ class AuthorController extends Controller
 
             $author->update($validatedData);
 
-            return redirect()->route('authors.index')->with('success', 'Author updated successfully.');
+            return redirect()->route('dashboard.index')->with('success', 'Author updated successfully.');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (Exception $e) {
             Log::error('Error updating author: ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while updating the author.');
+        }
+    }
+
+    public function destroy(Author $author)
+    {
+        try {
+            $author->delete();
+            return redirect()->route('dashboard.index')->with('success', 'Author deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('Error deleting author: ' . $e->getMessage());
+            return redirect()->route('dashboard.index')->with('error', 'An error occurred while deleting the author.');
         }
     }
 
@@ -76,15 +82,15 @@ class AuthorController extends Controller
             ]);
 
             // Redirection après la création
-            return redirect()->route('authors.index')->with('success', 'Author added successfully.');
+            return redirect()->route('authors.create')->with('success', 'Author added successfully.');
         } catch (ValidationException $e) {
             // Redirection en cas d'échec de validation
-            return redirect()->route('authors.index')->withErrors($e->errors())->withInput();
+            return redirect()->route('authors.create')->withErrors($e->errors())->withInput();
         } catch (Exception $e) {
             // Log de l'erreur
             Log::error($e);
             // Redirection en cas d'échec
-            return redirect()->route('authors.index')->with('error', 'Failed to add author. Please try again.');
+            return redirect()->route('authors.create')->with('error', 'Failed to add author. Please try again.');
         }
     }
 }

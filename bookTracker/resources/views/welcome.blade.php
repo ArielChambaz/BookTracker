@@ -88,7 +88,7 @@
                                 <th
                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Description</th>
-                                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+
                             </tr>
                         </thead>
 
@@ -110,6 +110,14 @@
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
                                         <a href="{{ route('authors.edit', $author->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    </td>
+                                    {{-- ajoute une pubelle pour delete --}}
+                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
+                                        <form action="{{ route('authors.destroy', $author->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
