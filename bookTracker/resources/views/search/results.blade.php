@@ -40,7 +40,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $book->title }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $book->author->first_name }} {{ $book->author->last_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $book->published_year }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $book->genre }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $book->category->name  }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a href="{{ route('books.edit', $book->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                 <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline">

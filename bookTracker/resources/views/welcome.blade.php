@@ -240,7 +240,7 @@
                                         <div class="text-sm leading-5 text-gray-900">{{ $book->published_year }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="text-sm leading-5 text-gray-900">{{ $book->genre }}</div>
+                                        <div class="text-sm leading-5 text-gray-900">{{ $book->category->name }}</div>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-left whitespace-no-wrap border-b border-gray-200">
                                         <a href="{{ route('books.edit', $book->id) }}" class="text-indigo-600 hover:text-indigo-900 inline-block mr-4">Edit</a>
