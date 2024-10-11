@@ -38,7 +38,7 @@ class BookController extends Controller
                 'author_id' => 'required|exists:authors,id',
                 'published_year' => 'required|integer',
                 'category_id' => 'required|exists:categories,id',
-                'body' => 'required|string',
+                'body' => 'nullable|string',
             ]);
 
             $book->update($validatedData);
@@ -68,10 +68,10 @@ class BookController extends Controller
         //dd($request->all()); //see what data is actually being passed from the form
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'author_id' => 'required|exists:author,id',
+            'author_id' => 'required|exists:authors,id',
             'published_year' => 'required|integer',
-            'category_id' => 'required|exists:category,id',
-            //'body' => 'required|string',  // Ensure body is included
+            'category_id' => 'required|exists:categories,id',
+            'body' => 'nullable|string',  // Ensure body is included
         ]);
 
         // Create the book using validated data
@@ -79,4 +79,10 @@ class BookController extends Controller
 
         return redirect()->route('books.create')->with('success', 'Book created successfully.');
     }
+
+    public function show(Book $book){
+        return view('books.display-single-book', compact('book'));
+    }
+
+
 }

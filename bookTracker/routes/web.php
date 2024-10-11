@@ -27,3 +27,6 @@ Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.e
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
+
+
+
