@@ -3,9 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div class="container px-6 py-8 mx-auto" id="main-content">
-        <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
-
+<div class="container px-6 py-8 mx-auto" id="main-content">
+    <h3 class="text-6xl font-bold text-gray-900 mb-4 text-center">
+        Welcome to <span class="text-blue-700">Booktracker</span> ! 
+    </h3>
+    <h4 class="text-xl font-medium text-gray-900 mb-6 ">
+        Take a look at our collection of freely available books.
+    </h4>
         @if(session('success'))
         <div role="alert" id="success-alert" class="mt-3 relative flex flex-col w-full p-3 text-sm text-white bg-green-600 rounded-md opacity-0 transition-opacity duration-500 ease-in-out">
             <p class="flex text-base">
@@ -128,19 +132,19 @@
                     <table class="min-w-full">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Name
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Date of Birth
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Email
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Description
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Actions
                                 </th>
                             </tr>
@@ -179,29 +183,26 @@
         </div>
 
         <div class="mt-4">
-            <div class="flex flex-wrap -mx-6">
-                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
-                        <div class="p-3 bg-orange-600 bg-opacity-75 rounded-full">
-                            <svg class="w-8 h-8 text-white" viewBox="0 0 28 28" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M22.4 23.1C22.4 24.2598 21.4598 25.2 20.3 25.2C19.1403 25.2 18.2 24.2598 18.2 23.1C18.2 21.9402 19.1403 21 20.3 21C21.4598 21 22.4 21.9402 22.4 23.1Z"
-                                    fill="currentColor"></path>
-                                <path
-                                    d="M9.1 25.2C10.2598 25.2 11.2 24.2598 11.2 23.1C11.2 21.9402 10.2598 21 9.1 21C7.9402 21 7 21.9402 7 23.1C7 24.2598 7.9402 25.2 9.1 25.2Z"
-                                    fill="currentColor"></path>
-                            </svg>
-                        </div>
+    <div class="flex flex-wrap -mx-6">
+        <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
+            <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                <div class="p-3 bg-orange-600 bg-opacity-75 rounded-full">
+                    <!-- Correct Book Icon -->
+                    <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l-7-2V5a1 1 0 011-1h10a1 1 0 011 1v12l-7 2zm0 0v-8m0 8l7-2V5a1 1 0 00-1-1h-6"/>
+                    </svg>
+                </div>
 
-                        <div class="mx-5">
-                            <h4 class="text-2xl font-semibold text-gray-700">{{ number_format($booksCount) }}</h4>
-                            <div class="text-gray-500">Total Books</div>
-                        </div>
-                    </div>
+                <div class="mx-5">
+                    <h4 class="text-2xl font-semibold text-gray-700">{{ number_format($booksCount) }}</h4>
+                    <div class="text-gray-500">Total Books</div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+
 
         <div class="flex flex-col mt-8">
             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -209,49 +210,52 @@
                     <table class="min-w-full">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Title
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Author
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Published Year
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                    Genre
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    Category
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                <th class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     Actions
                                 </th>
                             </tr>
                         </thead>
         
                         <tbody class="bg-white">
-                            @foreach($books as $book)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="text-sm leading-5 text-gray-900">{{ $book->title }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="text-sm leading-5 text-gray-900">{{ $book->author->first_name }} {{ $book->author->last_name }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="text-sm leading-5 text-gray-900">{{ $book->published_year }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="text-sm leading-5 text-gray-900">{{ $book->genre }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-left whitespace-no-wrap border-b border-gray-200">
-                                        <a href="{{ route('books.edit', $book->id) }}" class="text-indigo-600 hover:text-indigo-900 inline-block mr-4">Edit</a>
-                                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach($books as $book)
+    <tr>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
+                <a href="{{ route('books.show', $book->id) }}" class="hover:underline hover:font-bold">{{ $book->title }}</a>
+            </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">{{ $book->author->first_name }} {{ $book->author->last_name }}</div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">{{ $book->published_year }}</div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">{{ $book->category->name }}</div>
+        </td>
+        <td class="px-6 py-4 text-sm font-medium leading-5 text-left whitespace-no-wrap border-b border-gray-200">
+            <a href="{{ route('books.edit', $book->id) }}" class="text-indigo-600 hover:text-indigo-900 inline-block mr-4">Edit</a>
+            <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+            </form>
+        </td>
+    </tr>
+@endforeach
+
                         </tbody>
                     </table>
                 </div>

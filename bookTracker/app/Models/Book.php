@@ -4,14 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Book extends Model
 {
-    public function author()
-    {
-        return $this->belongsTo(Author::class);
-    }
-
     use HasFactory;
 
     /**
@@ -23,6 +20,17 @@ class Book extends Model
         'title',
         'author_id',
         'published_year',
-        'genre',
+        'body',
+        'category_id',
     ];
+
+    protected $with = ['author','category'];
+    
+    public function author(): BelongsTo{
+        return $this->belongsTo(Author::class);
+    }
+
+    public function category(): BelongsTo{
+        return $this->belongsTo(Category::class);
+    }
 }
