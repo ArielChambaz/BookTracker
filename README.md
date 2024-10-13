@@ -2,7 +2,7 @@
 # Laravel CRUD Project - BookTracker
 
 <p align="center">
-    <img src="C:/xampp/htdocs/BookTracker/bookTracker/public/img/capture_logo.jpg" alt="capture_logo">
+    <img src="bookTracker/public/img/capture_logo.jpg" alt="capture_logo">
 </p>
 
 Welcome to the GitHub repository of the final project of Ariel CHAMBAZ and Victor LEQUEUX AUDRAN made for the Framework based programming course 2024 at ITS ! This project was created to manage Books, Authors, and Categories. It features functionality to create, edit, delete, and view authors and books, with category management, and exception handling.
@@ -48,7 +48,7 @@ public function up(): void
 Here is the structure of the `Books table`, we can see that there are 2 foreign key, one to fetch the author from the `Authors table` and one to fetch the category from the `Categories table`  : 
 
 <p align="center">
-    <img src="C:/xampp/htdocs/BookTracker/bookTracker/public/img/capture_book_table_structure.jpg" alt="capture_book_table_structure">
+    <img src="bookTracker/public/img/capture_book_table_structure.jpg" alt="capture_book_table_structure">
 </p>
 
 Here are the relationships defined in the models `Book.php`, `Author.php`, and `Category.php`:
@@ -78,7 +78,7 @@ public function books(): HasMany {
 To automatically fill the tables in our database, we created new factories `BookFactory.php`, `AuthorFactory.php` and `CategoryFactory.php`. Here is a screenshot of the dummy data in the `Books table` in TablePlus:
 
 <p align="center">
-    <img src="C:/xampp/htdocs/BookTracker/bookTracker/public/img/capture_book_table_data.jpg" alt="capture_book_table_data">
+    <img src="bookTracker/public/img/capture_book_table_data.jpg" alt="capture_book_table_data">
 </p>
 
 Here is the code of `BookFactory.php`. As you can see we tried to mimic real books by generating long paragraph with spaces between them : 
@@ -124,7 +124,7 @@ public function run(): void{
 The UI uses TailwindCSS for styling and includes a responsive layout for better user experience. Here’s the dashboard / homepage of our website :
 
 <p align="center">
-    <img src="C:/xampp/htdocs/BookTracker/bookTracker/public/img/capture_home_page_top.jpg" alt="capture_home_page_top">
+    <img src="bookTracker/public/img/capture_home_page_top.jpg" alt="capture_home_page_top">
 </p>
 
 Buttons for actions (add author, add book, search) change color on hover to improve usability
