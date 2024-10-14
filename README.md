@@ -10,6 +10,53 @@ Welcome to the GitHub repository of the final project of Ariel CHAMBAZ and Victo
 Link to the video presentation:
 https://www.youtube.com/watch?v=J5luD0f5RhY
 
+## Requirements
+
+- PHP ^8.2
+- Composer
+- Node.js and npm
+
+## Installation
+
+1. Clone the repository:
+    ```sh
+    git clone git@github.com:ArielChambaz/laravel-its.git
+    cd laravel-its
+    ```
+
+2. Install PHP dependencies:
+    ```sh
+    composer install
+    ```
+
+3. Install JavaScript dependencies:
+    ```sh
+    npm install
+    ```
+
+4. Copy the [`.env.example`](.env.example) file to a new `.env` file and configure your environment variables:
+    ```sh
+    cp .env.example .env
+    ```
+
+5. Generate the application key:
+    ```sh
+    php artisan key:generate
+    ```
+
+## Development Scripts
+
+- To start the development server:
+    ```sh
+    php artisan serve
+    ```
+
+- To compile assets:
+    ```sh
+    npm run dev
+    ```
+
+
 ## Project Features
 
 - **CRUD Operations** for Books and Authors
