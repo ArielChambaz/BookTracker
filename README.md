@@ -7,6 +7,9 @@
 
 Welcome to the GitHub repository of the final project of Ariel CHAMBAZ and Victor LEQUEUX AUDRAN made for the Framework based programming course 2024 at ITS ! This project was created to manage Books, Authors, and Categories. It features functionality to create, edit, delete, and view authors and books, with category management, and exception handling.
 
+Link to the video presentation:
+https://www.youtube.com/watch?v=J5luD0f5RhY
+
 ## Project Features
 
 - **CRUD Operations** for Books and Authors
