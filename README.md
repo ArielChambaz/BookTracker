@@ -20,8 +20,8 @@ https://www.youtube.com/watch?v=J5luD0f5RhY
 
 1. Clone the repository:
     ```sh
-    git clone git@github.com:ArielChambaz/laravel-its.git
-    cd laravel-its
+    git git@github.com:ArielChambaz/BookTracker.git
+    cd BookTracker
     ```
 
 2. Install PHP dependencies:
