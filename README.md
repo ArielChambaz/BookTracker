@@ -189,24 +189,77 @@ Example Blade view code (file: `resources\views\books\show.blade.php`):
 
 ## Exception Management
 
-The project includes exception handling to prevent users from deleting an author with associated books.
+### Exception handling in AuthorController.php
 
-- If a user attempts to delete an author with books, the system displays an error message.
+The destroy method in AuthorController.php handles the deletion of an author. If the author is linked to books, deletion is prevented and an error message is returned to the user.
 
-Example code for exception handling (file: `app\Http\Controllers\AuthorController.php`):
+Example AuthorController.php view code (file: `app/Http/Controllers/AuthorController.php`):
+
+#### Code Example
 
 ```php
-public function destroy(Author $author) {
-    if ($author->books()->count()) {
-        return back()->withErrors('Cannot delete author with associated books.');
+public function destroy(Author $author)
+{
+    try {
+        if ($author->books()->count() > 0) {
+            return redirect()->route('dashboard.index')->with('error', 'Cannot delete author with associated books.');
+        }
+
+        $author->delete();
+        return redirect()->route('dashboard.index')->with('success', 'Author deleted successfully.');
+    } catch (Exception $e) {
+        Log::error('Error deleting author: ' . $e->getMessage());
+        return redirect()->route('dashboard.index')->with('error', 'An error occurred while deleting the author.');
     }
-    $author->delete();
 }
 ```
 
-<p align="center">
-    <img src="public/img/capture_exception_handling.jpg" alt="Exception Handling">
-</p>
+### Displaying Success and Error Messages in Blade
+
+The success and error messages are displayed in the Blade view using styled alerts. Here is an example of how to display these alerts in your Blade template.
+
+Exemple welcome.blade.php view code (file: `aresources/views/welcome.blade.php`):
+
+#### Code Example
+
+```
+@if(session('error'))
+    <div role="alert" id="error-alert" class="mt-3 relative flex flex-col w-full p-3 text-sm text-white bg-red-600 rounded-md opacity-0 transition-opacity duration-500 ease-in-out">
+        <p class="flex text-base">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 mr-2 mt-0.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"></path>
+            </svg>
+            Error
+        </p>
+        <p class="ml-4 p-3">
+            {{ session('error') }}
+        </p>
+        <button class="flex items-center justify-center transition-all w-8 h-8 rounded-md text-white hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5" type="button" onclick="this.parentElement.remove();">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alert = document.getElementById('error-alert');
+            setTimeout(() => {
+                alert.classList.remove('opacity-0');
+                alert.classList.add('opacity-100');
+            }, 200); // Delay to ensure the transition is visible
+
+            setTimeout(() => {
+                alert.classList.remove('opacity-100');
+                alert.classList.add('opacity-0');
+                setTimeout(() => {
+                    alert.remove();
+                }, 500); // Wait for the transition to complete before removing the element
+            }, 5200); // 5 seconds after the alert appears
+        });
+    </script>
+@endif
+```
 
 ## Dashboard Overview
 
