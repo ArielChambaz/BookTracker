@@ -21,7 +21,7 @@ https://www.youtube.com/watch?v=J5luD0f5RhY
 1. Clone the repository:
     ```sh
     git git@github.com:ArielChambaz/BookTracker.git
-    cd BookTracker
+    cd cd BookTracker/bookTracker/
     ```
 
 2. Install PHP dependencies:
