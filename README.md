@@ -195,9 +195,6 @@ You can view the details of a single book by clicking its title. The view displa
     <img src="public/img/capture_view_book.jpg" alt="capture_view_book">
 </p>
 
-Example Blade view code (file: `resources\views\books\show.blade.php`):
-
-
 ## Exception Management
 
 The project includes exception handling to prevent users from deleting an author with associated books or creating a new user with an already taken email address.
