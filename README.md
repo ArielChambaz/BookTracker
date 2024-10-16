@@ -62,7 +62,7 @@ https://www.youtube.com/watch?v=J5luD0f5RhY
 - **CRUD Operations** for Books and Authors
 - **Category Management** for Books
 - **View content** of a single book
-- **Exception Handling** for example when trying to delete an author linked to books it notify the user that it's not possible  
+- **Exception Handling** : for example when trying to delete an author linked to books it notify the user that it's not possible  
 - **Basic Blade Layout** with TailwindCSS for a responsive design
 
 ## Database Structure
@@ -123,7 +123,7 @@ public function books(): HasMany {
 }
 ```
 
-## Book, Category and Authors factories and seeders
+## Book, Category and Author factories and seeders
 
 To automatically fill the tables in our database, we created new factories `BookFactory.php`, `AuthorFactory.php` and `CategoryFactory.php`. Here is a screenshot of the dummy data in the `Books table` in TablePlus:
 
@@ -182,7 +182,7 @@ Buttons for actions (add author, add book, search) change color on hover to impr
 
 ## Book Management
 
-You can create, edit, and delete books. Each book belongs to an author and a category.
+You can create, edit, and delete books and authors. Each book belongs to an author and a category.
 
 <p align="center">
     <img src="bookTracker/public/img/capture_add_book.jpg" alt="capture_add_book">
