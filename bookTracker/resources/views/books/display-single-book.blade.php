@@ -3,7 +3,7 @@
 @section('content')
 <div class="container px-6 py-8 mx-auto" id="main-content">
     <!-- Improved Title Styling -->
-    <h3 class="text-6xl font-bold text-gray-900 mb-6 text-center tracking-wide leading-tight">
+    <h3 class="text-6xl font-bold text-gray-900 text-center tracking-wide leading-tight">
         <span class="text-blue-700">Read</span> a Book :
     </h3>
 
@@ -11,7 +11,7 @@
         <div class="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="flex items-center justify-between px-8 py-6 bg-blue-800">
                 <h1 class="text-4xl font-bold text-white">{{ $book->title }}</h1>
-                <div class="flex rounded-lg bg-white hover:bg-black">
+                <div class="flex rounded-lg ml-6 bg-white hover:bg-black">
                     <a href="{{ route('dashboard.index')}}" class="text-black text-sm mt-1 ml-2 mr-2 mb-1 hover:text-white text-center font-bold">Back to dashboard</a>
                 </div>
             </div>

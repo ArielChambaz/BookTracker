@@ -8,8 +8,8 @@
     <h3 class="text-6xl font-bold text-gray-900 mb-4 text-center">
         Add a book 
     </h3>
-    <h4 class="text-xl font-medium text-gray-900 mb-4 ">
-        Contribute to this free library by uploading a book !
+    <h4 class="text-xl font-medium text-gray-600 mb-4">
+        <em>Contribute to this free library by uploading a book !</em>
     </h4>
 
     @if(session('success'))

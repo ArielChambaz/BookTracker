@@ -7,6 +7,56 @@
 
 Welcome to the GitHub repository of the final project of Ariel CHAMBAZ and Victor LEQUEUX AUDRAN made for the Framework based programming course 2024 at ITS ! This project was created to manage Books, Authors, and Categories. It features functionality to create, edit, delete, and view authors and books, with category management, and exception handling.
 
+Link to the video presentation:
+https://www.youtube.com/watch?v=J5luD0f5RhY
+
+## Requirements
+
+- `PHP 8.2`
+- `Composer`
+- `Node.js` and `npm`
+- `Tailwind` dependencies
+
+## Installation
+
+1. Clone the repository:
+    ```sh
+    git git@github.com:ArielChambaz/BookTracker.git
+    cd cd BookTracker/bookTracker/
+    ```
+
+2. Install PHP dependencies:
+    ```sh
+    composer install
+    ```
+
+3. Install JavaScript dependencies:
+    ```sh
+    npm install
+    ```
+
+4. Copy the [`.env.example`](.env.example) file to a new `.env` file and configure your environment variables:
+    ```sh
+    cp .env.example .env
+    ```
+
+5. Generate the application key:
+    ```sh
+    php artisan key:generate
+    ```
+
+## Development Scripts
+
+- To start the development server:
+    ```sh
+    php artisan serve
+    ```
+
+- To compile assets:
+    ```sh
+    npm run dev
+    ```
+
 ## Project Features
 
 - **CRUD Operations** for Books and Authors
@@ -45,7 +95,7 @@ public function up(): void
 - **Author** can have many **Books**.
 - **Category** can be assigned to many **Books**.
 
-Here is the structure of the `Books table`, we can see that there are 2 foreign key, one to fetch the author from the `Authors table` and one to fetch the category from the `Categories table`  : 
+Here is the structure of the `Books table` visualized in `TablePlus` we can see that there are 2 foreign key, one to fetch the author from the `Authors table` and one to fetch the category from the `Categories table`  : 
 
 <p align="center">
     <img src="bookTracker/public/img/capture_book_table_structure.jpg" alt="capture_book_table_structure">
@@ -136,98 +186,42 @@ Buttons for actions (add author, add book, search) change color on hover to impr
 You can create, edit, and delete books. Each book belongs to an author and a category.
 
 <p align="center">
-    <img src="public/img/capture_create_book.jpg" alt="Create Book Page">
+    <img src="public/img/capture_add_book.jpg" alt="capture_add_book">
 </p>
-
-Example code for displaying books with actions (file: `resources\views\books\index.blade.php`):
-
-```php
-@foreach($books as $book)
-    <tr>
-        <td>{{ $book->title }}</td>
-        <td>{{ $book->author->first_name }} {{ $book->author->last_name }}</td>
-        <td>{{ $book->published_year }}</td>
-        <td>{{ $book->category->name }}</td>
-        <td>
-            <a href="{{ route('books.edit', $book->id) }}" class="btn btn-edit">Edit</a>
-            <form action="{{ route('books.destroy', $book->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-delete">Delete</button>
-            </form>
-        </td>
-    </tr>
-@endforeach
-```
-
-## Display Single Book
 
 You can view the details of a single book by clicking its title. The view displays the book's title, author, category, and content.
 
 <p align="center">
-    <img src="public/img/capture_view_book.jpg" alt="View Book">
+    <img src="public/img/capture_view_book.jpg" alt="capture_view_book">
 </p>
 
 Example Blade view code (file: `resources\views\books\show.blade.php`):
 
-```php
-@extends('layouts.app')
-
-@section('content')
-    <h1>{{ $book->title }}</h1>
-    <p>Author: {{ $book->author->first_name }} {{ $book->author->last_name }}</p>
-    <p>Published Year: {{ $book->published_year }}</p>
-    <p>Category: {{ $book->category->name }}</p>
-    <div class="book-content">
-        {{ $book->body }}
-    </div>
-@endsection
-```
 
 ## Exception Management
 
-The project includes exception handling to prevent users from deleting an author with associated books.
+The project includes exception handling to prevent users from deleting an author with associated books or creating a new user with an already taken email address.
 
-- If a user attempts to delete an author with books, the system displays an error message.
+<p align="center">
+    <img src="public/img/capture_exception.jpg" alt="capture_exception">
+</p>
 
-Example code for exception handling (file: `app\Http\Controllers\AuthorController.php`):
+Here is a sample of the code for exception handling in case of author conflict (file: `app\Http\Controllers\AuthorController.php`):
 
 ```php
-public function destroy(Author $author) {
-    if ($author->books()->count()) {
-        return back()->withErrors('Cannot delete author with associated books.');
+public function destroy(Author $author)
+    {
+        try {
+            // Verify if author is linked to books 
+            if ($author->books()->count() > 0) {
+                return redirect()->route('dashboard.index')->with('error', 'Cannot delete author with associated books.');
+            }
+
+            $author->delete();
+            return redirect()->route('dashboard.index')->with('success', 'Author deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('Error deleting author: ' . $e->getMessage());
+            return redirect()->route('dashboard.index')->with('error', 'An error occurred while deleting the author.');
+        }
     }
-    $author->delete();
-}
-```
-
-<p align="center">
-    <img src="public/img/capture_exception_handling.jpg" alt="Exception Handling">
-</p>
-
-## Dashboard Overview
-
-The homepage of the application is a dashboard displaying counts of authors and books. You can navigate back to the dashboard from any page using the "Back to Dashboard" button.
-
-<p align="center">
-    <img src="public/img/capture_dashboard.jpg" alt="Dashboard">
-</p>
-
-Example controller code for the dashboard (file: `app\Http\Controllers\DashboardController.php`):
-
-```php
-public function index() {
-    $authorsCount = Author::count();
-    $booksCount = Book::count();
-    $authors = Author::all();
-    $books = Book::all();
-    
-    return view('welcome', compact('authorsCount', 'booksCount', 'authors', 'books'));
-}
-```
-
- (file: `resources\views\components\button.blade.php`):
-
-```html
-<a href="{{ route('books.index') }}" class="btn-back hover:bg-blue-600 hover:text-white">Back to Books List</a>
 ```

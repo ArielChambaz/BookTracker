@@ -7,8 +7,8 @@
     <h3 class="text-6xl font-bold text-gray-900 mb-4 text-center">
         Welcome to <span class="text-blue-700">Booktracker</span> ! 
     </h3>
-    <h4 class="text-xl font-medium text-gray-900 mb-6 ">
-        Take a look at our collection of freely available books.
+    <h4 class="text-xl font-medium text-gray-600 mb-6 "> 
+        <em>Take a look at our collection of freely available books.</em>
     </h4>
         @if(session('success'))
         <div role="alert" id="success-alert" class="mt-3 relative flex flex-col w-full p-3 text-sm text-white bg-green-600 rounded-md opacity-0 transition-opacity duration-500 ease-in-out">
