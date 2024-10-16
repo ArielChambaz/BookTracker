@@ -179,20 +179,19 @@ The UI uses TailwindCSS for styling and includes a responsive layout for better 
 
 Buttons for actions (add author, add book, search) change color on hover to improve usability
 
-**START EDITING FROM HERE**
 
 ## Book Management
 
 You can create, edit, and delete books. Each book belongs to an author and a category.
 
 <p align="center">
-    <img src="public/img/capture_add_book.jpg" alt="capture_add_book">
+    <img src="bookTracker/public/img/capture_add_book.jpg" alt="capture_add_book">
 </p>
 
 You can view the details of a single book by clicking its title. The view displays the book's title, author, category, and content.
 
 <p align="center">
-    <img src="public/img/capture_view_book.jpg" alt="capture_view_book">
+    <img src="bookTracker/public/img/capture_view_book.jpg" alt="capture_view_book">
 </p>
 
 ## Exception Management
@@ -200,7 +199,7 @@ You can view the details of a single book by clicking its title. The view displa
 The project includes exception handling to prevent users from deleting an author with associated books or creating a new user with an already taken email address.
 
 <p align="center">
-    <img src="public/img/capture_exception.jpg" alt="capture_exception">
+    <img src="bookTracker/public/img/capture_exception.jpg" alt="capture_exception">
 </p>
 
 Here is a sample of the code for exception handling in case of author conflict (file: `app\Http\Controllers\AuthorController.php`):
